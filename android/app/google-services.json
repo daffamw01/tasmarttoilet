@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543094586840",
+    "project_id": "smart-toilet-f1337",
+    "storage_bucket": "smart-toilet-f1337.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543094586840:android:92face60c690f55f8646ad",
+        "android_client_info": {
+          "package_name": "com.example.tasmarttoilet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBso1zRnHn4mmbsxYROV2ZlM0nZf3SF0Ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
