@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:tasmarttoilet/AdminPage.dart';
 import 'package:tasmarttoilet/main.dart';
 // import 'package:tasmarttoilet/services/auth.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -164,12 +166,26 @@ class _loginpageState extends State<loginpage> {
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator()));
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
-      Navigator.of(context).pop();
+      final userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
+      // Navigator.of(context).pop();
+
+      // final userId = userCredential.user?.uid;
+      // final userRole = await getUserRoleFromDatabase(userId);
+
+      // if (userRole == "Admin") {
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => AdminPage()));
+      // } else {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => MainPage()),
+      //   );
+      // }
       // Kembali ke halaman awal
-      // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       print('Error: $e');
       Navigator.of(context).pop();
@@ -187,9 +203,20 @@ class _loginpageState extends State<loginpage> {
         ),
       );
     }
+    Navigator.of(context).pop();
     // navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
+
+// Future<String?> getUserRoleFromDatabase(String? userId) async {
+//   if (userId != null) {
+//     DatabaseReference userRef =
+//         FirebaseDatabase.instance.ref().child('users').child(userId);
+//     DataSnapshot snapshot = await userRef.once() as DataSnapshot;
+//     return (snapshot.value as Map<String, dynamic>)['position'];
+//   }
+//   return null;
+// }
 
 // class PageCoba extends StatelessWidget {
 
