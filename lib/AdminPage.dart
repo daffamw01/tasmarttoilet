@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:tasmarttoilet/PopupForm.dart';
 import 'package:tasmarttoilet/accountpage.dart';
+import 'package:tasmarttoilet/models/user_model.dart';
+import 'package:tasmarttoilet/services/getData.dart';
 
 class ListPegawai {
   final String name;
@@ -28,53 +34,9 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  final List<ListPegawai> data = [
-    ListPegawai(
-      name: 'Daffa Maheswara',
-      role: 'Admin',
-      imagePath: 'images/fotodawe.jpg',
-      backgroundColor: Color(0XFFEEFFB0),
-    ),
-    ListPegawai(
-      name: 'Nasywaan Ammar S',
-      role: 'Admin',
-      imagePath: 'images/fotobaad.jpg',
-      backgroundColor: Color(0XFFF4E0FB),
-    ),
-    ListPegawai(
-      name: 'Nanda Fitri Tsalatsa',
-      role: 'Admin',
-      imagePath: 'images/fotoafit.jpg',
-      backgroundColor: Color(0XFFDEB764),
-    ),
-  ];
-
-  final List<ListPegawai> dataPetugas = [
-    ListPegawai(
-      name: 'Daffa Maheswara',
-      role: 'Petugas',
-      imagePath: 'images/fotodawe.jpg',
-      backgroundColor: Color(0XFFB4573D),
-    ),
-    ListPegawai(
-      name: 'Nasywaan Ammar S',
-      role: 'Petugas',
-      imagePath: 'images/fotobaad.jpg',
-      backgroundColor: Color(0XFFFFDC830),
-    ),
-    ListPegawai(
-      name: 'Nanda Fitri Tsalatsa',
-      role: 'Petugas',
-      imagePath: 'images/fotoafit.jpg',
-      backgroundColor: Color(0XFF91C2BA),
-    ),
-    ListPegawai(
-      name: 'Briyantama Wahab',
-      role: 'Petugas',
-      imagePath: 'images/fotokuli.jpg',
-      backgroundColor: Color(0XFFB7AE9F),
-    ),
-  ];
+  Future getdata() async {
+    return [];
+  }
 
   // bool _isFormOpen = false;
 
@@ -116,367 +78,21 @@ class _AdminPageState extends State<AdminPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.425,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Admin : ${data.length}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontFamily: 'SansPro',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                          TotalPegawai(
+                            position: 'Admin',
                           ),
                           Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.425,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Petugas : ${dataPetugas.length}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontFamily: 'SansPro',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          )
+                          TotalPegawai(
+                            position: 'Petugas',
+                          ),
                         ],
                       ),
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 30),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.307,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15.0, top: 15, bottom: 15, right: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.32,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: Color(0XFF00799F),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Admin',
-                                      style: TextStyle(
-                                        fontFamily: 'SansPro',
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.065,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 160,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: data.length,
-                                        itemBuilder: (context, index) {
-                                          final pegawai = data[index];
-                                          return Padding(
-                                            padding: EdgeInsets.only(
-                                              right: 15.0,
-                                              bottom: 5,
-                                              top: 5,
-                                              left: 5,
-                                            ),
-                                            child: Container(
-                                              width: 160,
-                                              decoration: BoxDecoration(
-                                                color: pegawai.backgroundColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.3),
-                                                    spreadRadius: 1,
-                                                    blurRadius: 3,
-                                                    offset: Offset(1, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Stack(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                      vertical: 10.0,
-                                                      horizontal: 10,
-                                                    ),
-                                                    child: CircleAvatar(
-                                                      backgroundImage:
-                                                          AssetImage(pegawai
-                                                              .imagePath),
-                                                      radius: 27,
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    bottom: 30.0,
-                                                    left: 10,
-                                                    child: SizedBox(
-                                                      width: 150,
-                                                      child: Text(
-                                                        pegawai.name,
-                                                        maxLines: 1,
-                                                        overflow:
-                                                            TextOverflow.clip,
-                                                        style: TextStyle(
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.04,
-                                                          fontFamily: 'SansPro',
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    bottom: 10,
-                                                    left: 10.0,
-                                                    child: Text(
-                                                      pegawai.role,
-                                                      style: TextStyle(
-                                                        fontFamily: 'SansPro',
-                                                        fontSize: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.035,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                      Petugas(
+                        position: 'Admin',
                       ),
 ////////////////////////////////////////////////////////////////////////        PETUGAS       ///////////////////////////////////////////////
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 15),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.307,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15.0, top: 15, bottom: 15, right: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.32,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    decoration: BoxDecoration(
-                                      color: Color(0XFF00799F),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Petugas',
-                                      style: TextStyle(
-                                        fontFamily: 'SansPro',
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.065,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                  InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text("Informasi Pegawai"),
-                                            content: Text(
-                                                "Tampilkan informasi lebih lanjut di sini."),
-                                            actions: [
-                                              TextButton(
-                                                child: Text("Tutup"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 160,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: dataPetugas.length,
-                                          itemBuilder: (context, index) {
-                                            final pegawai = dataPetugas[index];
-                                            return Padding(
-                                              padding: EdgeInsets.only(
-                                                right: 15.0,
-                                                bottom: 5,
-                                                top: 5,
-                                                left: 5,
-                                              ),
-                                              child: Container(
-                                                width: 160,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      pegawai.backgroundColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black
-                                                          .withOpacity(0.3),
-                                                      spreadRadius: 1,
-                                                      blurRadius: 3,
-                                                      offset: Offset(1, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Stack(
-                                                  // crossAxisAlignment:
-                                                  //     CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                        vertical: 10.0,
-                                                        horizontal: 10,
-                                                      ),
-                                                      child: CircleAvatar(
-                                                        backgroundImage:
-                                                            AssetImage(pegawai
-                                                                .imagePath),
-                                                        radius: 27,
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      bottom: 30.0,
-                                                      left: 10,
-                                                      child: SizedBox(
-                                                        width: 150,
-                                                        child: Text(
-                                                          pegawai.name,
-                                                          maxLines: 1,
-                                                          style: TextStyle(
-                                                            fontSize: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.04,
-                                                            fontFamily:
-                                                                'SansPro',
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.black,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      left: 10.0,
-                                                      bottom: 10,
-                                                      child: Text(
-                                                        pegawai.role,
-                                                        style: TextStyle(
-                                                          fontFamily: 'SansPro',
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.035,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                      Petugas(
+                        position: 'Petugas',
                       ),
 
                       Container(
@@ -536,6 +152,7 @@ class _AdminPageState extends State<AdminPage> {
                       //     ),
                       //   ),
                       // ),
+
                       // // Tampilkan Popup Form ketika _isFormOpen true
                       // if (_isFormOpen)
                       //   Align(
@@ -551,6 +168,321 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TotalPegawai extends StatelessWidget {
+  const TotalPegawai({super.key, required this.position});
+  final String position;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.425,
+        height: MediaQuery.of(context).size.height * 0.035,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        alignment: Alignment.center,
+        child: StreamBuilder(
+            stream: GetData.getUsers(position: position),
+            builder: (context, snapshot) {
+              if (snapshot.data != null) {
+                return Text(
+                  "Petugas : ${snapshot.data.length}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontFamily: 'SansPro',
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }
+              return Container();
+            }),
+      ),
+    );
+  }
+}
+
+class Petugas extends StatelessWidget {
+  const Petugas({
+    super.key,
+    required this.position,
+  });
+
+  final String position;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.307,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, top: 15, bottom: 15, right: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.32,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  decoration: BoxDecoration(
+                    color: Color(0XFF00799F),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    position,
+                    style: TextStyle(
+                      fontFamily: 'SansPro',
+                      fontSize: MediaQuery.of(context).size.width * 0.065,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 160,
+                    child: StreamBuilder(
+                        stream: GetData.getUsers(position: position),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            //here's the typo;
+
+                            print('ini error');
+                            // print();
+                            return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                Map<dynamic, dynamic> values = json
+                                    .decode(json.encode(snapshot.data[index]));
+                                final pegawai = UserModel.fromJson(
+                                    values as Map<String, dynamic>);
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 15.0,
+                                    bottom: 5,
+                                    top: 5,
+                                    left: 5,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height: 50,
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0XFF00799F),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        20))),
+                                                    child: Text(
+                                                      "Informasi Pegawai",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 24,
+                                                          fontFamily: 'SansPro',
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(15, 15, 0, 0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          "Nama  : ${pegawai.fullName}",
+                                                          maxLines: 1,
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontFamily:
+                                                                  'SansPro'),
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Text(
+                                                          "Posisi   : ${pegawai.position}",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontFamily:
+                                                                  'SansPro'),
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 15.0),
+                                                          child: Text(
+                                                            "Email   : ${pegawai.email}",
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                    'SansPro'),
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Text(
+                                                          "No. Hp : ${pegawai.phoneNumber}",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontFamily:
+                                                                  'SansPro'),
+                                                        ),
+                                                        ButtonBar(
+                                                          children: [
+                                                            TextButton(
+                                                              child:
+                                                                  Text("Tutup"),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 160,
+                                      decoration: BoxDecoration(
+                                        color: Colors.primaries[Random()
+                                            .nextInt(Colors.primaries.length)],
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.3),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                            offset: Offset(1, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Stack(
+                                        // crossAxisAlignment:
+                                        //     CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 10.0,
+                                              horizontal: 10,
+                                            ),
+                                            child: CircleAvatar(
+                                                // backgroundImage:
+                                                // AssetImage(pegawai.imagePath),
+                                                // radius: 27,
+                                                ),
+                                          ),
+                                          Positioned(
+                                            bottom: 30.0,
+                                            left: 10,
+                                            child: SizedBox(
+                                              width: 150,
+                                              child: Text(
+                                                pegawai.fullName,
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.04,
+                                                  fontFamily: 'SansPro',
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10.0,
+                                            bottom: 10,
+                                            child: Text(
+                                              pegawai.position,
+                                              style: TextStyle(
+                                                fontFamily: 'SansPro',
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.035,
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                          return Container();
+                        }),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

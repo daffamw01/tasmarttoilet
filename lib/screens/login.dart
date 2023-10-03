@@ -185,7 +185,10 @@ class _loginpageState extends State<loginpage> {
       //   );
       // }
       // Kembali ke halaman awal
-      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+      if (mounted) {
+        navigatorKey.currentState!.popUntil((route) => route.isFirst);
+        Navigator.of(context).pop();
+      }
     } on FirebaseAuthException catch (e) {
       print('Error: $e');
       Navigator.of(context).pop();
@@ -203,7 +206,6 @@ class _loginpageState extends State<loginpage> {
         ),
       );
     }
-    Navigator.of(context).pop();
     // navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

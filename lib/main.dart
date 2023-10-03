@@ -6,8 +6,10 @@ import 'package:tasmarttoilet/AccountDrawer.dart';
 import 'package:tasmarttoilet/AdminPage.dart';
 import 'package:tasmarttoilet/JadwalPegawai.dart';
 import 'package:tasmarttoilet/MonitoringPegawai.dart';
+import 'package:tasmarttoilet/models/user_model.dart';
 import 'package:tasmarttoilet/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert';
 // import 'package:tasmarttoilet/monitoringpegawai.dart';
 // import 'package:tasmarttoilet/splash.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -133,11 +135,13 @@ class _MainPageState extends State<MainPage> {
         final dataSnapshot = await userRef.once();
 
         if (dataSnapshot.snapshot.value != null) {
-          final userData =
-              await dataSnapshot.snapshot.value as Map<dynamic, dynamic>;
-          final userPosition = userData['position'] as String;
+          final userData = UserModel.fromJson(
+              json.decode(json.encode(dataSnapshot.snapshot.value)));
+          // final userData =
+          //     dataSnapshot.snapshot.value as Map<dynamic, dynamic>;
+          // final userPosition = userData['position'] as String;
           setState(() {
-            userRole = userPosition;
+            userRole = userData.position;
           });
         }
       }

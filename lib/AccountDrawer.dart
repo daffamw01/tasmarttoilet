@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasmarttoilet/accountpage.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
+import 'package:tasmarttoilet/services/getData.dart';
 
 class AccountDrawer extends StatefulWidget {
   const AccountDrawer({super.key});
@@ -46,14 +47,39 @@ class _AccountDrawerState extends State<AccountDrawer> {
               backgroundImage: AssetImage('images/fotodawe.jpg'),
             ),
             SizedBox(height: 12),
-            Text(
-              'Daffa Maheswara',
-              style: TextStyle(fontSize: 28, color: Colors.white),
-            ),
-            Text(
-              'Petugas',
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
+            StreamBuilder(
+                stream: GetData.getUsersPetugas(),
+                builder: (context, snapshot) {
+                  if (snapshot.data != null) {
+                    return Column(
+                      children: [
+                        Text(
+                          snapshot.data['fullName'],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontFamily: 'SansPro',
+                          ),
+                        ),
+                        Text(
+                          snapshot.data['position'],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontFamily: 'SansPro',
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return Container();
+                }),
+            // Text(
+            //   'Daffa Maheswara',
+            //   style: TextStyle(fontSize: 28, color: Colors.white),
+            // ),
           ],
         ),
       );
