@@ -13,6 +13,7 @@ class UserModel {
   String fullName;
   String phoneNumber;
   String position;
+  String profileImage;
   String uid;
 
   UserModel({
@@ -20,6 +21,7 @@ class UserModel {
     required this.fullName,
     required this.phoneNumber,
     required this.position,
+    required this.profileImage,
     required this.uid,
   });
 
@@ -28,6 +30,7 @@ class UserModel {
         fullName: json["fullName"],
         phoneNumber: json["phoneNumber"],
         position: json["position"],
+        profileImage: json["profileImage"] ?? '',
         uid: json["uid"],
       );
 
@@ -36,6 +39,7 @@ class UserModel {
         "fullName": fullName,
         "phoneNumber": phoneNumber,
         "position": position,
+        "profileImage": profileImage,
         "uid": uid,
       };
 }

@@ -25,6 +25,15 @@ dependencies:
   firebase_storage: ^11.2.7
   fluttertoast: ^8.2.2
   ndialog: ^4.3.1
+  # flutter_blue_plus: ^1.19.0
+  get: ^4.6.6
+  syncfusion_flutter_calendar: ^23.1.42
+  table_calendar: ^3.0.9
+  flutter_blue: ^0.8.0
+  gatt:
+  flutter_clean_calendar2: ^0.0.1
+  cloud_firestore: ^4.12.1
+  shared_preferences: ^2.2.2
   # cloud_firestore:
 
 flutter_native_splash:

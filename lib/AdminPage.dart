@@ -1,29 +1,29 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:tasmarttoilet/EditJadwal.dart';
 import 'package:tasmarttoilet/PopupForm.dart';
-import 'package:tasmarttoilet/accountpage.dart';
+import 'package:tasmarttoilet/gantipass.dart';
 import 'package:tasmarttoilet/models/user_model.dart';
+import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
 
-class ListPegawai {
-  final String name;
-  final String role;
-  final String imagePath;
-  final Color backgroundColor;
+// class ListPegawai {
+//   final String name;
+//   final String role;
+//   final String imagePath;
+//   final Color backgroundColor;
 
-  ListPegawai({
-    required this.name,
-    required this.role,
-    required this.imagePath,
-    required this.backgroundColor,
-  });
-}
+//   ListPegawai({
+//     required this.name,
+//     required this.role,
+//     required this.imagePath,
+//     required this.backgroundColor,
+//   });
+// }
 
 void main(List<String> args) {
-  runApp(AdminPage());
+  runApp(const AdminPage());
 }
 
 class AdminPage extends StatefulWidget {
@@ -34,10 +34,6 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  Future getdata() async {
-    return [];
-  }
-
   // bool _isFormOpen = false;
 
   @override
@@ -48,12 +44,7 @@ class _AdminPageState extends State<AdminPage> {
         body: Center(
           child: Stack(
             children: [
-              Image.asset(
-                'images/background.jpg',
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
+              const Background(),
               SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -63,19 +54,145 @@ class _AdminPageState extends State<AdminPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 20, left: 10, bottom: 20),
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: Text(
-                          "Hai, Selamat Pagi Daffa!",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'SansPro',
-                            fontSize: MediaQuery.of(context).size.width * 0.065,
-                          ),
-                        ),
-                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                                top: 20, left: 10, bottom: 20),
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Text(
+                              "Hai, Selamat Pagi Daffa!",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'SansPro',
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.065,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 9),
+                          Container(
+                            padding: const EdgeInsets.only(right: 10),
+                            width: 115,
+                            height: 50,
+                            // decoration: const BoxDecoration(
+                            //     borderRadius:
+                            //         BorderRadius.all(Radius.circular(10))),
+                            child: ElevatedButton.icon(
+                              icon: const Icon(Icons.task),
+                              label: const Text(
+                                'Edit Jadwal',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                              // style: ElevatedButton.styleFrom(
+                              //     shape: RoundedRectangleBorder(
+                              //         borderRadius: BorderRadius.circular(10))),
+                              onPressed: () {
+                                // final editJadwalController =
+                                //     TextEditingController();
+                                // final editWaktuController =
+                                //     TextEditingController();
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) {
+                                //       return Dialog(
+                                //         shape: RoundedRectangleBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(20)),
+                                //         child: SingleChildScrollView(
+                                //           child: Column(
+                                //             children: [
+                                //               judulDialog(
+                                //                   context, 'Edit Jadwal'),
+                                //               Padding(
+                                //                 padding:
+                                //                     const EdgeInsets.all(16.0),
+                                //                 child: Form(
+                                //                   // key: _formKey,
+                                //                   child: Column(
+                                //                     children: <Widget>[
+                                //                       TextFormField(
+                                //                         controller:
+                                //                             editJadwalController,
+                                //                         obscureText: true,
+                                //                         decoration:
+                                //                             const InputDecoration(
+                                //                                 labelText:
+                                //                                     'Kata Sandi Lama'),
+                                //                         // validator: (value) {
+                                //                         //   if (value!.isEmpty) {
+                                //                         //     Fluttertoast.showToast(
+                                //                         //         msg: 'Kata Sandi Lama harus diisi');
+                                //                         //     return;
+                                //                         //   }
+                                //                         //   return null;
+                                //                         // },
+                                //                       ),
+                                //                       TextFormField(
+                                //                         controller:
+                                //                             editWaktuController,
+                                //                         obscureText: true,
+                                //                         decoration:
+                                //                             const InputDecoration(
+                                //                                 labelText:
+                                //                                     'Kata Sandi Baru'),
+                                //                         // validator: (value) {
+                                //                         //   return null;
+                                //                         // },
+                                //                       ),
+                                //                       const SizedBox(
+                                //                           height: 16),
+                                //                       // ElevatedButton(
+                                //                       //   onPressed: _changePassword,
+                                //                       //   child: const Text('Ganti Password'),
+                                //                       // ),
+                                //                     ],
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               ButtonBar(
+                                //                 children: <Widget>[
+                                //                   TextButton(
+                                //                     child: const Text('Batal'),
+                                //                     onPressed: () {
+                                //                       Navigator.of(context)
+                                //                           .pop();
+                                //                     },
+                                //                   ),
+                                //                   TextButton(
+                                //                     child: const Text('Simpan'),
+                                //                     onPressed: () {
+                                //                       // String oldPassword = _oldPasswordController.text;
+                                //                       // String newPassword = _newPasswordController.text;
+                                //                       // if (oldPassword.isEmpty) {
+                                //                       //   Fluttertoast.showToast(
+                                //                       //       msg: 'Kata Sandi Lama harus diisi');
+                                //                       //   return;
+                                //                       // }
+                                //                       // if (newPassword.isEmpty) {
+                                //                       //   Fluttertoast.showToast(
+                                //                       //       msg: 'Kata Sandi Baru harus diisi');
+                                //                       //   return;
+                                //                       // }
+                                //                       Container();
+                                //                     },
+                                //                   )
+                                //                 ],
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       );
+                                //     });
+                                EditJadwal.showEditScheduleDialog(context);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TotalPegawai(
@@ -87,26 +204,17 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                         ],
                       ),
-                      Petugas(
+                      const Petugas(
                         position: 'Admin',
                       ),
-////////////////////////////////////////////////////////////////////////        PETUGAS       ///////////////////////////////////////////////
-                      Petugas(
+                      const Petugas(
                         position: 'Petugas',
                       ),
 
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         child: ElevatedButton(
-                          child: Text(
-                            'Buat Akun Baru',
-                            style: TextStyle(
-                                fontFamily: 'SansPro',
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.05),
-                          ),
                           onPressed: () {
                             // showDialog(
                             //   context: context,
@@ -122,9 +230,17 @@ class _AdminPageState extends State<AdminPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40.0),
                             ),
-                            backgroundColor: Color(0xFF06141C),
+                            backgroundColor: const Color(0xFF06141C),
                             minimumSize: Size(MediaQuery.of(context).size.width,
                                 MediaQuery.of(context).size.height * 0.07),
+                          ),
+                          child: Text(
+                            'Buat Akun Baru',
+                            style: TextStyle(
+                                fontFamily: 'SansPro',
+                                fontWeight: FontWeight.bold,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.05),
                           ),
                         ),
                       ),
@@ -182,7 +298,7 @@ class TotalPegawai extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.425,
         height: MediaQuery.of(context).size.height * 0.035,
@@ -196,7 +312,7 @@ class TotalPegawai extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.data != null) {
                 return Text(
-                  "Petugas : ${snapshot.data.length}",
+                  "$position : ${snapshot.data.length}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -224,7 +340,7 @@ class Petugas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.307,
@@ -242,7 +358,7 @@ class Petugas extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.32,
                   height: MediaQuery.of(context).size.height * 0.05,
                   decoration: BoxDecoration(
-                    color: Color(0XFF00799F),
+                    color: const Color(0XFF00799F),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   alignment: Alignment.center,
@@ -256,10 +372,10 @@ class Petugas extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 160,
                     child: StreamBuilder(
@@ -268,18 +384,17 @@ class Petugas extends StatelessWidget {
                           if (snapshot.data != null) {
                             //here's the typo;
 
-                            print('ini error');
+                            // print('ini error');
                             // print();
                             return ListView.builder(
                               itemCount: snapshot.data.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                Map<dynamic, dynamic> values = json
-                                    .decode(json.encode(snapshot.data[index]));
-                                final pegawai = UserModel.fromJson(
-                                    values as Map<String, dynamic>);
+                                UserModel pegawai = userModelFromJson(
+                                    json.encode(snapshot.data[index]));
+
                                 return Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                     right: 15.0,
                                     bottom: 5,
                                     top: 5,
@@ -304,7 +419,7 @@ class Petugas extends StatelessWidget {
                                                             .size
                                                             .width,
                                                     height: 50,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                         color:
                                                             Color(0XFF00799F),
                                                         borderRadius:
@@ -315,7 +430,7 @@ class Petugas extends StatelessWidget {
                                                                 topRight: Radius
                                                                     .circular(
                                                                         20))),
-                                                    child: Text(
+                                                    child: const Text(
                                                       "Informasi Pegawai",
                                                       textAlign:
                                                           TextAlign.center,
@@ -337,23 +452,35 @@ class Petugas extends StatelessWidget {
                                                       mainAxisSize:
                                                           MainAxisSize.min,
                                                       children: [
+                                                        Center(
+                                                          child: CircleAvatar(
+                                                            radius: 75,
+                                                            backgroundImage:
+                                                                NetworkImage(pegawai
+                                                                    .profileImage),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 15),
                                                         Text(
                                                           "Nama  : ${pegawai.fullName}",
                                                           maxLines: 1,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 18,
                                                               fontFamily:
                                                                   'SansPro'),
                                                         ),
-                                                        SizedBox(height: 5),
+                                                        const SizedBox(
+                                                            height: 5),
                                                         Text(
                                                           "Posisi   : ${pegawai.position}",
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 18,
                                                               fontFamily:
                                                                   'SansPro'),
                                                         ),
-                                                        SizedBox(height: 5),
+                                                        const SizedBox(
+                                                            height: 5),
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -364,16 +491,17 @@ class Petugas extends StatelessWidget {
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 fontSize: 18,
                                                                 fontFamily:
                                                                     'SansPro'),
                                                           ),
                                                         ),
-                                                        SizedBox(height: 5),
+                                                        const SizedBox(
+                                                            height: 5),
                                                         Text(
                                                           "No. Hp : ${pegawai.phoneNumber}",
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 18,
                                                               fontFamily:
                                                                   'SansPro'),
@@ -381,8 +509,8 @@ class Petugas extends StatelessWidget {
                                                         ButtonBar(
                                                           children: [
                                                             TextButton(
-                                                              child:
-                                                                  Text("Tutup"),
+                                                              child: const Text(
+                                                                  "Tutup"),
                                                               onPressed: () {
                                                                 Navigator.of(
                                                                         context)
@@ -404,8 +532,7 @@ class Petugas extends StatelessWidget {
                                     child: Container(
                                       width: 160,
                                       decoration: BoxDecoration(
-                                        color: Colors.primaries[Random()
-                                            .nextInt(Colors.primaries.length)],
+                                        color: RandomPastelColor(),
                                         borderRadius: BorderRadius.circular(20),
                                         boxShadow: [
                                           BoxShadow(
@@ -413,7 +540,7 @@ class Petugas extends StatelessWidget {
                                                 Colors.black.withOpacity(0.3),
                                             spreadRadius: 1,
                                             blurRadius: 3,
-                                            offset: Offset(1, 2),
+                                            offset: const Offset(1, 2),
                                           ),
                                         ],
                                       ),
@@ -422,15 +549,15 @@ class Petugas extends StatelessWidget {
                                         //     CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                               vertical: 10.0,
                                               horizontal: 10,
                                             ),
                                             child: CircleAvatar(
-                                                // backgroundImage:
-                                                // AssetImage(pegawai.imagePath),
-                                                // radius: 27,
-                                                ),
+                                              radius: 27,
+                                              backgroundImage: NetworkImage(
+                                                  pegawai.profileImage),
+                                            ),
                                           ),
                                           Positioned(
                                             bottom: 30.0,

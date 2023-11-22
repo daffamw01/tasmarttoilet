@@ -2,14 +2,20 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:tasmarttoilet/AccountDrawer.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:tasmarttoilet/AdminPage.dart';
+import 'package:tasmarttoilet/CalendarPage.dart';
+import 'package:tasmarttoilet/CleanCalendar.dart';
 import 'package:tasmarttoilet/JadwalPegawai.dart';
 import 'package:tasmarttoilet/MonitoringPegawai.dart';
+import 'package:tasmarttoilet/AccountPage.dart';
 import 'package:tasmarttoilet/models/user_model.dart';
 import 'package:tasmarttoilet/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:convert';
+
+import 'package:tasmarttoilet/sfCalendar.dart';
 // import 'package:tasmarttoilet/monitoringpegawai.dart';
 // import 'package:tasmarttoilet/splash.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -17,11 +23,14 @@ import 'dart:convert';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  FlutterBlue.instance;
+  runApp(const MyApp());
 }
 
 //
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // final FirebaseAuth _auth = FirebaseAuth.instance;
   // final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -33,71 +42,22 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Something went wrong!'));
+              return const Center(child: Text('Something went wrong!'));
             } else if (snapshot.hasData) {
-              // final user = snapshot.data;
-              // if (user != null) {
-
-              // }
-              // }
-              // final user = snapshot.data!;
-              // DatabaseReference userRef = FirebaseDatabase.instance
-              //     .ref()
-              //     .child("users")
-              //     .child(user.uid);
-              // userRef.once().then((DataSnapshot snapshot) {
-              //   if (snapshot.value != null) {
-              //     Map<dynamic, dynamic> userData = snapshot.value;
-              //     String userPosition = userData["posisi"];
-
-              //     if (userPosition == 'admin') {
-              //       return AdminPage();
-              //     } else {
-              //       return MonitoringPegawai();
-              //     }
-              //   }
-              // },)
-              // User? user = snapshot.data;
-              // String? userPosition;
-
-              // if (user != null) {
-              //   DatabaseReference userRef = FirebaseDatabase.instance
-              //       .ref()
-              //       .child("users")
-              //       .child(user.uid);
-              //   userRef.once().then((DataSnapshot snapshot) {
-              //     if (snapshot.value != null) {
-              //       Map<dynamic, dynamic> userData = snapshot.value;
-              //       String userPosition
-              //     }
-              //   });
-              // }
-              // final userRole = "Admin";
-              return MainPage();
+              return const MainPage();
             } else {
-              return loginpage();
+              return const loginpage();
             }
-            // if (snapshot.hasData) {
-            //   // Pengguna sudah masuk
-            //   return MainPage();
-            // } else {
-            //   // Pengguna belum masuk
-            //   return loginpage();
-            // }
-            // }
           },
         ),
-        // initialRoute: '/login',
-        // routes: {
-        //   '/login': (context) => loginpage(),
-        //   'main': (context) => MainPage(),
-        // },
       );
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   // final String userRole;
   // MainPage({required this.userRole});
   @override
@@ -118,9 +78,10 @@ class _MainPageState extends State<MainPage> {
 
   // List<Icon> currentNavItems = [];
 
-  int index = 1;
+  int index = 0;
   String userRole = "";
 
+  @override
   void initState() {
     super.initState();
     getUserPosition();
@@ -129,6 +90,7 @@ class _MainPageState extends State<MainPage> {
   Future<void> getUserPosition() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
+
       if (user != null) {
         final databaseReference = FirebaseDatabase.instance.ref();
         final userRef = databaseReference.child("users").child(user.uid);
@@ -145,21 +107,22 @@ class _MainPageState extends State<MainPage> {
           });
         }
       }
-    } catch (error) {
-      print("Error: $error");
-    }
+    } catch (error) {}
   }
 
   @override
   Widget build(BuildContext context) {
-    final itemsAdmin = const [
+    const itemsAdmin = [
+      Icon(Icons.monitor, size: 30, color: Color(0XFF084B72)),
+      Icon(Icons.calendar_month_outlined, size: 30, color: Color(0XFF084B72)),
+      Icon(Icons.admin_panel_settings_outlined,
+          size: 30, color: Color(0XFF084B72)),
+      Icon(Icons.account_box_outlined, size: 30, color: Color(0XFF084B72)),
+    ];
+    const itemsPetugas = [
       Icon(Icons.monitor, size: 30, color: Color(0XFF084B72)),
       Icon(Icons.calendar_month_outlined, size: 30, color: Color(0XFF084B72)),
       Icon(Icons.account_box_outlined, size: 30, color: Color(0XFF084B72)),
-    ];
-    final itemsPetugas = const [
-      Icon(Icons.monitor, size: 30, color: Color(0XFF084B72)),
-      Icon(Icons.calendar_month_outlined, size: 30, color: Color(0XFF084B72)),
       // Icon(Icons.account_box_outlined, size: 30, color: Color(0XFF084B72))
     ];
     // List<Icon> itemsToShow;
@@ -169,20 +132,22 @@ class _MainPageState extends State<MainPage> {
     //   itemsToShow = itemspetugas;
     // }
 
-    final itemsToShow = userRole == 'Admin' ? itemsAdmin : itemsPetugas;
+    // final itemsToShow = userRole == 'Admin' ? itemsAdmin : itemsPetugas;
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: AppBar(
-        title: Text('Smart Toilet'),
-        backgroundColor: Color(0XFF003452),
+        title: const Text('Smart Toilet'),
+        backgroundColor: const Color(0XFF003452),
       ),
-      drawer: AccountDrawer(),
+      // drawer: const AccountDrawer(),
       bottomNavigationBar: userRole == 'Admin'
           ? SizedBox(
               width: MediaQuery.of(context).size.width,
               child: bottombar(icons: itemsAdmin))
           : bottombar(icons: itemsPetugas),
-      body: getSelectedWidget(index: index), //userRole: widget.userRole!),
+      body: userRole == 'Admin'
+          ? getSelectedWidgetAdmin(index: index)
+          : getSelectedWidget(index: index), //userRole: widget.userRole!),
     );
   }
 
@@ -197,7 +162,7 @@ class _MainPageState extends State<MainPage> {
           index = selectedIndex;
         });
       },
-      backgroundColor: Color(0XFF084B72),
+      backgroundColor: const Color(0XFF084B72),
       height: 50,
       animationDuration: const Duration(milliseconds: 500),
     );
@@ -206,7 +171,6 @@ class _MainPageState extends State<MainPage> {
   Widget getSelectedWidget({
     required int index,
   }) {
-    print(index);
     //required String userRole
     Widget widget;
     // final userRole = '';
@@ -215,7 +179,39 @@ class _MainPageState extends State<MainPage> {
         widget = const MonitoringPegawai();
         break;
       case 1:
-        widget = const JadwalPegawai();
+        widget = const CalendarTry();
+        // JadwalPegawai();
+        break;
+      case 2:
+        // if (userRole == 'Admin') {
+        //   widget = const AdminPage();
+        // } else {
+        //   widget = const Placeholder();
+        // }
+        widget = const AccountPage();
+        break;
+      default:
+        widget = const MonitoringPegawai();
+        break;
+    }
+    return widget;
+  }
+
+  Widget getSelectedWidgetAdmin({
+    required int index,
+  }) {
+    //required String userRole
+    Widget widget;
+    // final userRole = '';
+    switch (index) {
+      case 0:
+        widget = const MonitoringPegawai();
+        break;
+      case 1:
+        widget = const CalendarTry();
+        // const DemoApp();
+        // const CalendarPage();
+        // JadwalPegawai();
         break;
       case 2:
         // if (userRole == 'Admin') {
@@ -224,6 +220,9 @@ class _MainPageState extends State<MainPage> {
         //   widget = const Placeholder();
         // }
         widget = const AdminPage();
+        break;
+      case 3:
+        widget = const AccountPage();
         break;
       default:
         widget = const MonitoringPegawai();

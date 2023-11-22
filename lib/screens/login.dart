@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:tasmarttoilet/AdminPage.dart';
-import 'package:tasmarttoilet/main.dart';
 // import 'package:tasmarttoilet/services/auth.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -20,6 +17,8 @@ import 'package:tasmarttoilet/main.dart';
 // }
 
 class loginpage extends StatefulWidget {
+  const loginpage({super.key});
+
   @override
   State<loginpage> createState() => _loginpageState();
 }
@@ -40,6 +39,7 @@ class _loginpageState extends State<loginpage> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         navigatorKey: navigatorKey,
@@ -55,11 +55,11 @@ class _loginpageState extends State<loginpage> {
               ),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 0.0),
+                      const SizedBox(height: 0.0),
                       Image.asset(
                         'images/login.png',
                         width: MediaQuery.of(context).size.width * 0.75,
@@ -79,10 +79,10 @@ class _loginpageState extends State<loginpage> {
                           // ],
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 'Sign In',
                                 selectionColor: Colors.black,
                                 style: TextStyle(
@@ -91,15 +91,15 @@ class _loginpageState extends State<loginpage> {
                                   fontFamily: 'SansPro',
                                 ),
                               ),
-                              SizedBox(height: 0.0),
+                              const SizedBox(height: 0.0),
                               TextField(
                                 controller: emailController,
                                 textInputAction: TextInputAction.next,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: 'Email',
                                 ),
                               ),
-                              SizedBox(height: 0.0),
+                              const SizedBox(height: 0.0),
                               TextField(
                                 controller: passwordController,
                                 textInputAction: TextInputAction.done,
@@ -119,9 +119,16 @@ class _loginpageState extends State<loginpage> {
                                           color: Colors.grey),
                                     )),
                               ),
-                              SizedBox(height: 20.0),
+                              const SizedBox(height: 20.0),
                               ElevatedButton(
                                 onPressed: signIn,
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  backgroundColor: const Color(0xFF4F52FF),
+                                  minimumSize: const Size(340, 40),
+                                ),
                                 // () {
                                 // dynamic result = await _auth.signInAnon();
                                 // if (result == null) {
@@ -135,16 +142,9 @@ class _loginpageState extends State<loginpage> {
                                 //     MaterialPageRoute(
                                 //         builder: (context) => MainPage()));
                                 // },
-                                child: Text(
+                                child: const Text(
                                   'Login',
                                   selectionColor: Colors.white,
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  backgroundColor: Color(0xFF4F52FF),
-                                  minimumSize: Size(340, 40),
                                 ),
                               ),
                             ],
@@ -164,7 +164,7 @@ class _loginpageState extends State<loginpage> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(child: CircularProgressIndicator()));
+        builder: (context) => const Center(child: CircularProgressIndicator()));
     try {
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
@@ -195,12 +195,13 @@ class _loginpageState extends State<loginpage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('Terjadi kesalahan saat masuk. Silakan coba lagi.'),
+          title: const Text('Error'),
+          content:
+              const Text('Terjadi kesalahan saat masuk. Silakan coba lagi.'),
           actions: [
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
