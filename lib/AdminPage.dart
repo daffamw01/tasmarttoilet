@@ -22,9 +22,9 @@ import 'package:tasmarttoilet/services/getData.dart';
 //   });
 // }
 
-void main(List<String> args) {
-  runApp(const AdminPage());
-}
+// void main(List<String> args) {
+//   runApp(const AdminPage());
+// }
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);

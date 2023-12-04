@@ -21,6 +21,16 @@ class MonitoringModel {
   String tissue;
   String volumeAir;
 
+  // final dynamic bilik,
+  //     kejernihanAir,
+  //     kelembapan,
+  //     sabun,
+  //     suhuAir,
+  //     suhuRuang,
+  //     tingkatBau,
+  //     tissue,
+  //     volumeAir;
+
   MonitoringModel({
     required this.bilik,
     required this.kejernihanAir,
@@ -31,20 +41,31 @@ class MonitoringModel {
     required this.tingkatBau,
     required this.tissue,
     required this.volumeAir,
+
+    // this.bilik,
+    // this.kejernihanAir,
+    // this.kelembapan,
+    // this.sabun,
+    // this.suhuAir,
+    // this.suhuRuang,
+    // this.tingkatBau,
+    // this.tissue,
+    // this.volumeAir,
   });
 
-  factory MonitoringModel.fromJson(Map<String, dynamic> json) =>
-      MonitoringModel(
-        bilik: json["bilik"],
-        kejernihanAir: json["kejernihanAir"],
-        kelembapan: json["kelembapan"],
-        sabun: json["sabun"],
-        suhuAir: json["suhuAir"],
-        suhuRuang: json["suhuRuang"],
-        tingkatBau: json["tingkatBau"],
-        tissue: json["tissue"],
-        volumeAir: json["volumeAir"],
-      );
+  factory MonitoringModel.fromJson(Map<dynamic, dynamic> json) {
+    return MonitoringModel(
+      bilik: json["bilik"],
+      kejernihanAir: json["kejernihanAir"],
+      kelembapan: json["kelembapan"],
+      sabun: json["sabun"],
+      suhuAir: json["suhuAir"],
+      suhuRuang: json["suhuRuang"],
+      tingkatBau: json["tingkatBau"],
+      tissue: json["tissue"],
+      volumeAir: json["volumeAir"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "bilik": bilik,
