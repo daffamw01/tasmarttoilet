@@ -1,12 +1,7 @@
-import 'dart:collection';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-// import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:tasmarttoilet/models/schedule_model.dart';
+import 'package:tasmarttoilet/models/Schedule_Model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 
 class CalendarTry extends StatefulWidget {
@@ -17,16 +12,6 @@ class CalendarTry extends StatefulWidget {
 }
 
 class _CalendarTryState extends State<CalendarTry> {
-  final _database = FirebaseDatabase.instance;
-  final List<Meeting> _appointments = <Meeting>[];
-  final bool _isLoading = true;
-  // CalendarController _calendarController = CalendarController();
-  // final CalendarFormat _calendarFormat = CalendarFormat.week;
-  late DateTime _focusedDay;
-  late DateTime _firstDay;
-  late DateTime _lastDay;
-  // late DateTime _selectedDay;
-  late Map<DateTime, List<ScheduleModel>> _events;
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
   }
@@ -37,54 +22,9 @@ class _CalendarTryState extends State<CalendarTry> {
   @override
   void initState() {
     super.initState();
-    _events = LinkedHashMap(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    );
-    _focusedDay = DateTime.now();
-    _firstDay = DateTime.now().subtract(const Duration(days: 1000));
-    _lastDay = DateTime.now().add(const Duration(days: 1000));
     _calendarView = CalendarView.schedule;
     loadEventsFromFirestore();
-    // _loadFirestoreSchedules();
-    // _focusedDay = DateTime.now();
-    // _firstDay = DateTime.now().subtract(const Duration(days: 1000));
-    // _lastDay = DateTime.now().add(const Duration(days: 1000));
-    // _selectedDay = DateTime.now();
   }
-
-  // _loadFirestoreSchedules() async {
-  //   final snap = await FirebaseFirestore.instance
-  //       .collection('schedule')
-  //       .withConverter(
-  //           fromFirestore: ScheduleModel.fromFirestore,
-  //           toFirestore: (event, options) => event.toFirestore())
-  //       .get();
-  //   for (var doc in snap.docs) {
-  //     final event = doc.data();
-  //     final day = DateTime(event.date.year, event.date.month, event.date.day);
-  //     if (_events[day] == null) {
-  //       _events[day] = [];
-  //     }
-  //     _events[day]!.add(event);
-  //   }
-  //   setState(() {});
-  // }
-
-  // List _getSchedulesForTheDay(DateTime day) {
-  //   return _events[day] ?? [];
-  // }
-
-  // Future<List<ScheduleModel>> getSchedulesFromFirestore() async {
-  //   // List<ScheduleModel> events = [];
-  //   QuerySnapshot eventSnapshot =
-  //       await FirebaseFirestore.instance.collection('schedule').get();
-  //   eventSnapshot.docs.forEach((DocumentSnapshot doc) {
-  //     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-  //     events.add(ScheduleModel.fromFirestore(data));
-  //   });
-  //   return events;
-  // }
 
   Future<void> loadEventsFromFirestore() async {
     QuerySnapshot eventSnapshot =
@@ -118,25 +58,10 @@ class _CalendarTryState extends State<CalendarTry> {
                     color: Colors.white),
                 child: Column(
                   children: [
-                    // SfCalendar(
-                    //   view: CalendarView.month,
-                    //   monthViewSettings: const MonthViewSettings(
-                    //     showAgenda: false,
-                    //     agendaViewHeight: 60,
-                    //     // agendaItemHeight: 60,
-                    //     navigationDirection: MonthNavigationDirection.vertical,
-                    //     appointmentDisplayMode:
-                    //         MonthAppointmentDisplayMode.indicator,
-                    //     // agendaStyle:
-                    //     //     AgendaStyle(backgroundColor: Colors.blueAccent)
-                    //   ),
-                    // ),
                     Expanded(
                       child: SfCalendar(
                         view: _calendarView,
                         headerHeight: 50,
-                        // minDate: _focusedDay,
-
                         dataSource: EventDataSource(events),
                         scheduleViewSettings: const ScheduleViewSettings(
                             monthHeaderSettings: MonthHeaderSettings(
@@ -166,22 +91,13 @@ class _CalendarTryState extends State<CalendarTry> {
                             return Container();
                           }
                         },
-                        // viewNavigationMode: ViewNavigationMode.none,
                       ),
                     )
-                    // SfCalendar(
-                    //   view: CalendarView.timelineMonth,
-                    //   headerHeight: 0,
-                    // )
                   ],
                 ),
               ),
             ],
           )
-          // SfCalendar(
-          //   view: CalendarView.timelineMonth,
-          //   // firstDayOfWeek: ,
-          // ),
         ],
       ),
     );

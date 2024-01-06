@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart'
     as CustomDialog;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'package:ndialog/ndialog.dart';
 
 class SignUpDialog extends StatefulWidget {
@@ -194,13 +192,6 @@ class _SignUpDialogState extends State<SignUpDialog> {
                       return;
                     }
 
-                    // ProgressDialog progressDialog = ProgressDialog(
-                    //   context,
-                    //   title: const Text('Uploading !!!'),
-                    //   message: const Text('Please wait'),
-                    // );
-                    // progressDialog.show();
-
                     showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -225,11 +216,7 @@ class _SignUpDialogState extends State<SignUpDialog> {
                             .child('profile_images')
                             .child(filename)
                             .putFile(_imageFile!);
-                        // print('ini errornya');
-                        // print(e);
-
                         TaskSnapshot snapshot = await uploadTask;
-                        // whenComplete(() {});
                         String profileImageUrl =
                             await snapshot.ref.getDownloadURL();
 
@@ -241,26 +228,12 @@ class _SignUpDialogState extends State<SignUpDialog> {
                           'phoneNumber': phoneNumber,
                           'uid': uid,
                         });
-
-                        // await userRef.child(uid).set({
-                        //   'fullName': fullName,
-                        //   'email': email,
-                        //   'position': position,
-                        //   'phoneNumber': phoneNumber,
-                        //   'uid': uid,
-                        // });
-
-                        // progressDialog.dismiss();
                         Fluttertoast.showToast(msg: 'Success');
                         Navigator.of(context).pop();
                       } else {
-                        // progressDialog.dismiss();
-
                         Fluttertoast.showToast(msg: 'Failed');
                       }
                     } on FirebaseAuthException catch (e) {
-                      // progressDialog.dismiss();
-
                       if (e.code == 'invalid-email') {
                         Fluttertoast.showToast(msg: 'Email Format Wrong');
                       } else if (e.code == 'email-already-exists') {
@@ -269,19 +242,9 @@ class _SignUpDialogState extends State<SignUpDialog> {
                         Fluttertoast.showToast(msg: 'Password is weak');
                       }
                     } catch (e) {
-                      // progressDialog.dismiss();
                       Navigator.of(context).pop();
                       Fluttertoast.showToast(msg: 'Something went wrong');
                     }
-
-                    // showDialog(context: context, builder: builder)
-
-                    // print('Email: $email');
-                    // print('Password: $password');
-                    // print('Nama Lengkap: $fullName');
-                    // print('Posisi: $position');
-                    // print('Nomor HP: $phoneNumber');
-
                     Navigator.of(context).pop();
                   },
                 ),

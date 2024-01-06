@@ -1,30 +1,10 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:tasmarttoilet/EditJadwal.dart';
-import 'package:tasmarttoilet/PopupForm.dart';
-import 'package:tasmarttoilet/gantipass.dart';
-import 'package:tasmarttoilet/models/user_model.dart';
+import 'package:tasmarttoilet/services/EditJadwal.dart';
+import 'package:tasmarttoilet/services/PopupForm.dart';
+import 'package:tasmarttoilet/models/User_Model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
-
-// class ListPegawai {
-//   final String name;
-//   final String role;
-//   final String imagePath;
-//   final Color backgroundColor;
-
-//   ListPegawai({
-//     required this.name,
-//     required this.role,
-//     required this.imagePath,
-//     required this.backgroundColor,
-//   });
-// }
-
-// void main(List<String> args) {
-//   runApp(const AdminPage());
-// }
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -34,8 +14,6 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  // bool _isFormOpen = false;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,9 +54,6 @@ class _AdminPageState extends State<AdminPage> {
                             padding: const EdgeInsets.only(right: 10),
                             width: 115,
                             height: 50,
-                            // decoration: const BoxDecoration(
-                            //     borderRadius:
-                            //         BorderRadius.all(Radius.circular(10))),
                             child: ElevatedButton.icon(
                               icon: const Icon(Icons.task),
                               label: const Text(
@@ -86,106 +61,7 @@ class _AdminPageState extends State<AdminPage> {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
-                              // style: ElevatedButton.styleFrom(
-                              //     shape: RoundedRectangleBorder(
-                              //         borderRadius: BorderRadius.circular(10))),
                               onPressed: () {
-                                // final editJadwalController =
-                                //     TextEditingController();
-                                // final editWaktuController =
-                                //     TextEditingController();
-                                // showDialog(
-                                //     context: context,
-                                //     builder: (BuildContext context) {
-                                //       return Dialog(
-                                //         shape: RoundedRectangleBorder(
-                                //             borderRadius:
-                                //                 BorderRadius.circular(20)),
-                                //         child: SingleChildScrollView(
-                                //           child: Column(
-                                //             children: [
-                                //               judulDialog(
-                                //                   context, 'Edit Jadwal'),
-                                //               Padding(
-                                //                 padding:
-                                //                     const EdgeInsets.all(16.0),
-                                //                 child: Form(
-                                //                   // key: _formKey,
-                                //                   child: Column(
-                                //                     children: <Widget>[
-                                //                       TextFormField(
-                                //                         controller:
-                                //                             editJadwalController,
-                                //                         obscureText: true,
-                                //                         decoration:
-                                //                             const InputDecoration(
-                                //                                 labelText:
-                                //                                     'Kata Sandi Lama'),
-                                //                         // validator: (value) {
-                                //                         //   if (value!.isEmpty) {
-                                //                         //     Fluttertoast.showToast(
-                                //                         //         msg: 'Kata Sandi Lama harus diisi');
-                                //                         //     return;
-                                //                         //   }
-                                //                         //   return null;
-                                //                         // },
-                                //                       ),
-                                //                       TextFormField(
-                                //                         controller:
-                                //                             editWaktuController,
-                                //                         obscureText: true,
-                                //                         decoration:
-                                //                             const InputDecoration(
-                                //                                 labelText:
-                                //                                     'Kata Sandi Baru'),
-                                //                         // validator: (value) {
-                                //                         //   return null;
-                                //                         // },
-                                //                       ),
-                                //                       const SizedBox(
-                                //                           height: 16),
-                                //                       // ElevatedButton(
-                                //                       //   onPressed: _changePassword,
-                                //                       //   child: const Text('Ganti Password'),
-                                //                       // ),
-                                //                     ],
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               ButtonBar(
-                                //                 children: <Widget>[
-                                //                   TextButton(
-                                //                     child: const Text('Batal'),
-                                //                     onPressed: () {
-                                //                       Navigator.of(context)
-                                //                           .pop();
-                                //                     },
-                                //                   ),
-                                //                   TextButton(
-                                //                     child: const Text('Simpan'),
-                                //                     onPressed: () {
-                                //                       // String oldPassword = _oldPasswordController.text;
-                                //                       // String newPassword = _newPasswordController.text;
-                                //                       // if (oldPassword.isEmpty) {
-                                //                       //   Fluttertoast.showToast(
-                                //                       //       msg: 'Kata Sandi Lama harus diisi');
-                                //                       //   return;
-                                //                       // }
-                                //                       // if (newPassword.isEmpty) {
-                                //                       //   Fluttertoast.showToast(
-                                //                       //       msg: 'Kata Sandi Baru harus diisi');
-                                //                       //   return;
-                                //                       // }
-                                //                       Container();
-                                //                     },
-                                //                   )
-                                //                 ],
-                                //               )
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       );
-                                //     });
                                 EditJadwal.showEditScheduleDialog(context);
                               },
                             ),
@@ -210,20 +86,11 @@ class _AdminPageState extends State<AdminPage> {
                       const Petugas(
                         position: 'Petugas',
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
                         child: ElevatedButton(
                           onPressed: () {
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (context) {
-                            //     return PopupForm();
-                            //   },
-                            // );
-                            // SignUpDialog dialog = SignUpDialog(); // Buat instance dari SignUpDialog
-                            // dialog.showSignUpDialog(context);
                             SignUpDialog.showSignUpDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
@@ -244,41 +111,6 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                         ),
                       ),
-
-                      // Padding(
-                      //   // width: MediaQuery.of(context).size.width,
-                      //   // alignment: Alignment.bottomCenter,
-                      //   padding:
-                      //       EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      //   child: AnimatedContainer(
-                      //     duration: Duration(milliseconds: 500),
-                      //     width: MediaQuery.of(context).size.width,
-                      //     height: _isFormOpen ? 0 : 50,
-                      //     child: ElevatedButton(
-                      //       onPressed: () {
-                      //         // setState(() {
-                      //         //   _isFormOpen = true;}
-                      //         // );
-                      //       },
-                      //       child: Text(
-                      //         'Buat Akun Baru',
-                      //         style: TextStyle(
-                      //             fontFamily: 'SansPro', fontSize: 16),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-
-                      // // Tampilkan Popup Form ketika _isFormOpen true
-                      // if (_isFormOpen)
-                      //   Align(
-                      //     alignment: Alignment.bottomCenter,
-                      //     child: AnimatedContainer(
-                      //       duration: Duration(milliseconds: 500),
-                      //       height: _isFormOpen ? 300 : 0,
-                      //       child: PopupForm(),
-                      //     ),
-                      //   ),
                     ],
                   ),
                 ),
@@ -382,10 +214,6 @@ class Petugas extends StatelessWidget {
                         stream: GetData.getUsers(position: position),
                         builder: (context, snapshot) {
                           if (snapshot.data != null) {
-                            //here's the typo;
-
-                            // print('ini error');
-                            // print();
                             return ListView.builder(
                               itemCount: snapshot.data.length,
                               scrollDirection: Axis.horizontal,
@@ -545,8 +373,6 @@ class Petugas extends StatelessWidget {
                                         ],
                                       ),
                                       child: Stack(
-                                        // crossAxisAlignment:
-                                        //     CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(

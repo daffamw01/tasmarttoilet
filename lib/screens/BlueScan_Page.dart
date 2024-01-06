@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-// import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
-import 'package:tasmarttoilet/BluetoothTry.dart';
-import 'package:tasmarttoilet/BluetoothWidget.dart';
 import 'package:tasmarttoilet/controller/bluetooth_controller.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
+import 'package:tasmarttoilet/services/BluetoothTry.dart';
+import 'package:tasmarttoilet/services/BluetoothWidget.dart';
 
 class BlueScanPage extends StatefulWidget {
   const BlueScanPage({super.key});
@@ -59,23 +58,6 @@ class _BlueScanPageState extends State<BlueScanPage> {
                         .toList(),
                   ),
                 )
-                // if (snapshot.hasData) {
-                //   return ListView.builder(
-                //       shrinkWrap: true,
-                //       itemCount: snapshot.data!.length,
-                //       itemBuilder: (context, index) {
-                //         final data = snapshot.data![index];
-                //         return ListTile(
-                //           title: Text(data.device.name),
-                //           subtitle: Text(data.device.id.id),
-                //           trailing: Text(data.rssi.toString()),
-                //         );
-                //       });
-                // } else {
-                //   return const Center(
-                //     child: Text("No Devices Found"),
-                //   );
-                // }
               ]),
             );
           }),

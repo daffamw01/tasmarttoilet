@@ -1,10 +1,5 @@
-// Copyright 2017, Paul DeMarco.
-// All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-// import 'package:gatt_service_numbers/gatt_service_numbers.dart';
 import 'package:tasmarttoilet/Bluetooth/gatt_service_numbers.dart';
 
 class ScanResultTile extends StatelessWidget {
@@ -259,9 +254,8 @@ class DescriptorTile extends StatelessWidget {
             '0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
             style: TextStyle(
               color: Theme.of(context).textTheme.bodySmall!.color,
-              fontSize: 16.0, // Ubah ukuran teks sesuai kebutuhan
-              fontWeight: FontWeight.bold, // Ubah gaya teks (misalnya, tebal)
-              // Atau tambahkan properti gaya teks lainnya sesuai keinginan Anda
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
             ),
           )
         ],
@@ -307,11 +301,9 @@ class AdapterStateTile extends StatelessWidget {
         title: Text(
           'Bluetooth adapter is ${state.toString().substring(15)}',
           style: const TextStyle(
-            fontSize: 16.0, // Sesuaikan ukuran teks
-            fontWeight:
-                FontWeight.bold, // Sesuaikan gaya teks (misalnya, tebal)
-            color: Colors.black, // Sesuaikan warna teks
-            // Atau tambahkan properti gaya teks lainnya sesuai keinginan Anda
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
         trailing: const Icon(

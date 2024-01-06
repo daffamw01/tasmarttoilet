@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
-// import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:tasmarttoilet/BlueScanPage.dart';
-import 'package:tasmarttoilet/gantipass.dart';
-import 'package:tasmarttoilet/models/user_model.dart';
+import 'package:tasmarttoilet/screens/BlueScan_Page.dart';
+import 'package:tasmarttoilet/services/ChangePass.dart';
+import 'package:tasmarttoilet/models/User_Model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
 
@@ -29,15 +26,13 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: Stack(
             children: [
               const Background(),
               SingleChildScrollView(
-                // child: Padding(
-                //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: StreamBuilder(
                     stream: GetData.getUsersPetugas(),
                     builder: (context, snapshot) {
@@ -82,9 +77,6 @@ class _AccountPageState extends State<AccountPage> {
                             Center(
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
-                                // width: click
-                                //     ? 500
-                                //     : MediaQuery.of(context).size.width,
                                 height: click ? 340 : 290,
                                 child: Column(
                                   children: [
@@ -96,7 +88,6 @@ class _AccountPageState extends State<AccountPage> {
                                             return SingleChildScrollView(
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
-                                              // children: [
                                               child: Column(
                                                 children: [
                                                   CircleAvatar(
@@ -114,9 +105,7 @@ class _AccountPageState extends State<AccountPage> {
                                                                 .width *
                                                             0.075,
                                                         fontFamily: 'SansPro',
-                                                        color: Colors.white
-                                                        // fontWeight: FontWeight.bold
-                                                        ),
+                                                        color: Colors.white),
                                                   ),
                                                   Text(
                                                     pegawai.position,
@@ -127,9 +116,7 @@ class _AccountPageState extends State<AccountPage> {
                                                                 .width *
                                                             0.06,
                                                         fontFamily: 'SansPro',
-                                                        color: Colors.white
-                                                        // fontWeight: FontWeight.bold
-                                                        ),
+                                                        color: Colors.white),
                                                   ),
                                                   Text(
                                                     pegawai.email,
@@ -140,9 +127,7 @@ class _AccountPageState extends State<AccountPage> {
                                                                 .width *
                                                             0.06,
                                                         fontFamily: 'SansPro',
-                                                        color: Colors.white
-                                                        // fontWeight: FontWeight.bold
-                                                        ),
+                                                        color: Colors.white),
                                                   ),
                                                   Text(
                                                     pegawai.phoneNumber,
@@ -153,9 +138,7 @@ class _AccountPageState extends State<AccountPage> {
                                                                 .width *
                                                             0.06,
                                                         fontFamily: 'SansPro',
-                                                        color: Colors.white
-                                                        // fontWeight: FontWeight.bold
-                                                        ),
+                                                        color: Colors.white),
                                                   ),
                                                 ],
                                               ),
@@ -184,7 +167,6 @@ class _AccountPageState extends State<AccountPage> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      // FlutterBluePlus.isScanning;
                                       BlueScanPage.showBlueScanDialog(context);
                                     },
                                     child: accountbox(
@@ -258,7 +240,6 @@ class _AccountPageState extends State<AccountPage> {
                       }
                       return Container();
                     }),
-                // ),
               )
             ],
           ),

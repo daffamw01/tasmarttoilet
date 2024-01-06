@@ -166,25 +166,11 @@ class _loginpageState extends State<loginpage> {
         barrierDismissible: false,
         builder: (context) => const Center(child: CircularProgressIndicator()));
     try {
-      final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: emailController.text.trim(),
-              password: passwordController.text.trim());
-      // Navigator.of(context).pop();
+      // final userCredential = await FirebaseAuth.instance
+      //     .signInWithEmailAndPassword(
+      //         email: emailController.text.trim(),
+      //         password: passwordController.text.trim());
 
-      // final userId = userCredential.user?.uid;
-      // final userRole = await getUserRoleFromDatabase(userId);
-
-      // if (userRole == "Admin") {
-      //   Navigator.push(
-      //       context, MaterialPageRoute(builder: (context) => AdminPage()));
-      // } else {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => MainPage()),
-      //   );
-      // }
-      // Kembali ke halaman awal
       if (mounted) {
         navigatorKey.currentState!.popUntil((route) => route.isFirst);
         Navigator.of(context).pop();

@@ -1,14 +1,8 @@
-// import 'dart:async';
-// import 'dart:convert';
-// import 'dart:html';
-
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tasmarttoilet/models/MonitoringModel.dart';
+import 'package:tasmarttoilet/models/Monitoring_Model.dart';
 
 class GetData {
   static Stream getUsersPetugas() async* {
@@ -21,40 +15,10 @@ class GetData {
     yield dataSnapshot.snapshot.value;
   }
 
-  // static Stream getUsersPegawai() async* {
-  //   final user = FirebaseAuth.instance.currentUser!;
-
-  //   final databaseReference = FirebaseDatabase.instance.ref();
-  //   final userRef = databaseReference.child("users").child(user.uid);
-  //   final dataSnapshot = await userRef.once();
-
-  //   yield dataSnapshot.snapshot.value;
-  // }
-
-  // static Stream getMonitoring() async* {
-  //   final databaseReference = FirebaseDatabase.instance.ref();
-  //   final userRef = databaseReference.child("monitoring");
-  //   final snapshot = await userRef.get();
-
-  //   final map = snapshot.value as Map<dynamic, dynamic>;
-  //   var data = [];
-  //   for (var value in map.values) {
-  //     if (value['bilik1'] == bilik1) {
-  //       data.add(value);
-  //     } else if (value['bilik2'] == bilik2) {
-  //       data.add(value);
-  //     }
-  //   }
-  //   yield data;
-  // }
-
   static Stream getUsers({required String position}) async* {
     final databaseReference = FirebaseDatabase.instance.ref();
     final userRef = databaseReference.child("users");
     final snapshot = await userRef.get();
-    // print('dataSnapshot :');
-    // print(snapshot);
-
     final map = snapshot.value as Map<dynamic, dynamic>;
     var data = [];
     for (var value in map.values) {
@@ -65,7 +29,6 @@ class GetData {
     yield data;
   }
 
-  // Future<void> _fetchAppointments() async {
   static Stream getBilik() async* {
     final databaseReference = FirebaseDatabase.instance.ref();
     final userRef = databaseReference.child("monitoring");
@@ -84,9 +47,6 @@ class GetData {
       i++;
     }
     output = List.from(output.reversed);
-
-    // output.map((out) => out['key'].cast<String>());
-    // debugPrint("CHECK : ${element['key']}");
 
     for (var num = 0; i < output.length; num++) {
       output[num]['key'] = output[num]['key'].cast<String>();
@@ -117,8 +77,6 @@ class GetData {
     final databaseReference = FirebaseDatabase.instance.ref();
     final userRef = databaseReference.child("users");
     final snapshot = await userRef.get();
-    // print('dataSnapshot :');
-    // print(snapshot);
 
     final map = snapshot.value as Map<dynamic, dynamic>;
     var data = [];

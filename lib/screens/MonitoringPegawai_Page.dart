@@ -1,17 +1,10 @@
 // import "package:curved_navigation_bar/curved_navigation_bar.dart";
-import "dart:convert";
 
 import "package:firebase_database/firebase_database.dart";
 import "package:flutter/material.dart";
-import "package:tasmarttoilet/models/MonitoringModel.dart";
-import "package:tasmarttoilet/models/user_model.dart";
+import 'package:tasmarttoilet/models/Monitoring_Model.dart';
 import "package:tasmarttoilet/reusable_widget/reusable_widget.dart";
 import "package:tasmarttoilet/services/getData.dart";
-// import "package:tasmarttoilet/JadwalPegawai.dart";
-
-// void main() {
-//   runApp(const MonitoringPegawai());
-// }
 
 class MonitoringPegawai extends StatefulWidget {
   const MonitoringPegawai({super.key});
@@ -21,36 +14,18 @@ class MonitoringPegawai extends StatefulWidget {
 }
 
 class _MonitoringPegawaiState extends State<MonitoringPegawai> {
-  // int _currentIndex = 0;
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String selectedValue = 'bilik1';
   TextEditingController customOptionController = TextEditingController();
-  // int index = 0; //SALAH
   final fb = FirebaseDatabase.instance;
   dynamic monit2;
 
   @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   setState(() {});
-  //   super.initState();
-  // }
-
-  @override
   Widget build(BuildContext context) {
     final DatabaseReference monitRef = fb.ref().child("monitoring");
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    // theme: ThemeData(
-    //     pageTransitionsTheme: PageTransitionsTheme(builders: {
-    //   TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    // })),
-    // home:
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(0),
         child: Stack(
-          // child: Stack(
           children: [
             const Background(),
             SingleChildScrollView(
@@ -76,7 +51,6 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                         MediaQuery.of(context).size.width * 0.9,
                                     height: 50,
                                     decoration: BoxDecoration(
-                                        // border: Border.all(),
                                         borderRadius: BorderRadius.circular(20),
                                         color: const Color(0XFFffffff)),
                                     child: DropdownButtonHideUnderline(
@@ -128,7 +102,6 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                       ),
                       StreamBuilder(
                           stream: monitRef.child(selectedValue).onValue,
-                          // GetData.getBilikbyKey2(key: selectedValue),
                           builder: (context, AsyncSnapshot snapshot) {
                             if (snapshot.hasData &&
                                 !snapshot.hasError &&
@@ -145,7 +118,7 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                       width: MediaQuery.of(context).size.width,
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.505,
+                                              0.510,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius:
@@ -191,11 +164,10 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                               ),
                                             ),
                                           ),
-                                          //===============================================================    PERSENTASE KEBERSIHAN   ==================================================================
+                                          //===============================================================    PERSENTASE KENYAMANAN   ==================================================================
                                           Padding(
-                                            padding: const EdgeInsets.all(15
-                                                // top: 15, left: 50, right: 50
-                                                ),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 15, 15, 10),
                                             child: Container(
                                               //LINGKARAN LUAR
                                               width: MediaQuery.of(context)
@@ -234,12 +206,12 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: Alignment.center,
-                                                child: const Text(
+                                                child: Text(
                                                   // PERSENTASE
-                                                  '100%',
-                                                  style: TextStyle(
+                                                  '${monit2.statusKenyamanan}%',
+                                                  style: const TextStyle(
                                                     fontFamily: 'SansPro',
-                                                    fontSize: 60,
+                                                    fontSize: 55,
                                                     color: Colors.white,
                                                   ),
                                                 ),
@@ -247,37 +219,35 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                             ),
                                           ),
                                           //==================================================================   KEJERNIHAN AIR    =================================================================================================================================
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Padding(
-                                                //BASE KOTAK KEJERNIHAN AIR
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 15,
-                                                  left: 15,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 10.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 12.5),
+                                                  child: monitoringbox1(
+                                                      context,
+                                                      'Kejernihan Air',
+                                                      '${monit2.kejernihanAir}%'),
                                                 ),
-                                                child: monitoringbox1(
-                                                    context,
-                                                    'Kejernihan Air',
-                                                    '${monit2.kejernihanAir}%'),
-                                              ),
-                                              const Spacer(),
-                                              //====================================================================    VOLUME AIR     ==================================================================================================================
-                                              Padding(
-                                                //BASE KOTAK VOLUME AIR
-                                                padding: const EdgeInsets.only(
-                                                  // left: MediaQuery.of(context).size.width *
-                                                  //     0.06,
-                                                  bottom: 15,
-                                                  right: 15,
+                                                const Spacer(),
+                                                //====================================================================    VOLUME AIR     ==================================================================================================================
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 12.5),
+                                                  child: monitoringbox1(
+                                                      context,
+                                                      'Volume Air',
+                                                      '${monit2.volumeAir}%'),
                                                 ),
-                                                child: monitoringbox1(
-                                                    context,
-                                                    'Volume Air',
-                                                    '${monit2.volumeAir}%'),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -290,12 +260,7 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                         //================================================    JUDUL KONDISI UDARA    =============================================================================
                                         Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                5, 35, 5, 10
-                                                // top: 35,
-                                                // bottom: 10,
-                                                // left: 5,
-                                                // right: 5,
-                                                ),
+                                                5, 30, 5, 10),
                                             child: judulmonitoring(
                                                 context, 'Kondisi Udara')),
                                         //================================================          KELEMBAPAN & SUHU RUANG           ===============================================================================
@@ -338,19 +303,6 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: <Widget>[
-                                              // Padding(
-                                              //   //KELEMBAPAN
-                                              //   padding: const EdgeInsets.only(
-                                              //     bottom: 0,
-                                              //     left: 5,
-                                              //     right: 5,
-                                              //   ),
-                                              //   child: monitoringbox2(
-                                              //       context,
-                                              //       'Kelembapan',
-                                              //       '${monit2.kelembapan}%'),
-                                              // ),
-                                              // const Spacer(),
                                               Padding(
                                                 //TINGKAT BAU
                                                 padding: const EdgeInsets.only(
@@ -431,6 +383,5 @@ class _MonitoringPegawaiState extends State<MonitoringPegawai> {
         ),
       ),
     );
-    // );
   }
 }

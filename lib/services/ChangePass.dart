@@ -25,15 +25,6 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  // static void showChangePassDialog(BuildContext context) {
-  //   showAnimatedDialog<void>(
-  //       context: context,
-  //       barrierDismissible: true,
-  //       builder: (BuildContext context) {
-  //         return const ChangePasswordPage();
-  //       });
-  // }
-
   final _formKey = GlobalKey<FormState>();
   final _oldPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
@@ -83,29 +74,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       obscureText: true,
                       decoration:
                           const InputDecoration(labelText: 'Kata Sandi Lama'),
-                      // validator: (value) {
-                      //   if (value!.isEmpty) {
-                      //     Fluttertoast.showToast(
-                      //         msg: 'Kata Sandi Lama harus diisi');
-                      //     return;
-                      //   }
-                      //   return null;
-                      // },
                     ),
                     TextFormField(
-                      controller: _newPasswordController,
-                      obscureText: true,
-                      decoration:
-                          const InputDecoration(labelText: 'Kata Sandi Baru'),
-                      // validator: (value) {
-                      //   return null;
-                      // },
-                    ),
+                        controller: _newPasswordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                            labelText: 'Kata Sandi Baru')),
                     const SizedBox(height: 16),
-                    // ElevatedButton(
-                    //   onPressed: _changePassword,
-                    //   child: const Text('Ganti Password'),
-                    // ),
                   ],
                 ),
               ),

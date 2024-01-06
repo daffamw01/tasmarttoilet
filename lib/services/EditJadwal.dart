@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:tasmarttoilet/models/schedule_model.dart';
+import 'package:tasmarttoilet/models/Schedule_Model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
 
@@ -55,7 +54,6 @@ class _EditJadwalState extends State<EditJadwal> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
-                // key: _formKey,
                 child: Column(
                   children: <Widget>[
                     TextField(
@@ -67,9 +65,6 @@ class _EditJadwalState extends State<EditJadwal> {
                               icon: const Icon(Icons.calendar_month))),
                       readOnly: true,
                     ),
-                    // ElevatedButton(
-                    //     onPressed: () => _selectDate(context),
-                    //     child: const Text('Pilih Tanggal')),
                     StreamBuilder(
                         stream: GetData.getUsers(position: 'Petugas'),
                         builder: (context, snapshot) {
@@ -150,17 +145,12 @@ class _EditJadwalState extends State<EditJadwal> {
       DatabaseEvent snapshot = await databaseReference
           .child('users')
           .orderByChild('fullName')
-          .equalTo('fullName')
+          .equalTo(fullName)
           .once();
-      // databaseReference
-      //     .child('users')
-      //     .orderByChild('fullName')
-      //     .equalTo(fullName)
-      //     .once()
-      //     .then((DataSnapshot snapshot) {
       if (snapshot.snapshot.value != null) {
-        final Map<String, dynamic>? userData =
-            snapshot.snapshot.value as Map<String, dynamic>?;
+        final Map<dynamic, dynamic>? userData =
+            snapshot.snapshot.value as dynamic;
+        print("userData: $userData");
         String uid = userData!.keys.first;
 
         ScheduleModel schedule =
@@ -199,25 +189,8 @@ class _EditJadwalState extends State<EditJadwal> {
       } else {
         Fluttertoast.showToast(msg: 'UID tidak ditemukan untuk $fullName');
       }
-      // });
     } else {
       Fluttertoast.showToast(msg: 'Pilih Nama terlebih dahulu');
     }
-
-    // AppointmentModel appointment = AppointmentModel(
-    //   uid: Uid(date: dateTime.toUtc().toIso8601String()),
-    // );
-
-    // final FirebaseDatabase database = FirebaseDatabase.instance;
-    // DatabaseReference ref =
-    //     database.ref().child("dates/${dateTime.toIso8601String()}");
-
-    // ref.child('appointments').set({"name": "John"});
-    // // debugPrint(appointment.toJson().toString());
   }
-
-  // StreamBuilder<dynamic> listDrop() {
-  // final String selectedPosition;
-  //   return
-  // }
 }

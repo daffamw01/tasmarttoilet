@@ -1,4 +1,3 @@
-import 'package:flutter/scheduler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ScheduleModel {

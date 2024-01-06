@@ -1,17 +1,9 @@
-// Copyright 2017, Paul DeMarco.
-// All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:tasmarttoilet/BluetoothWidget.dart';
-
-// void main() {
-//   runApp(const FlutterBlueApp());
-// }
+import 'package:tasmarttoilet/services/BluetoothWidget.dart';
 
 class FlutterBlueApp extends StatelessWidget {
   const FlutterBlueApp({super.key});

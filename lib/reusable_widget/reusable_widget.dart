@@ -120,26 +120,6 @@ Container monitoringbox1(BuildContext context, String title, String content) {
             ),
           ),
         ),
-        // Container(
-        //   width: 160,
-        //   height: 28,
-        //   decoration: BoxDecoration(
-        //     color: Color(0XFF084B72),
-        //     borderRadius: BorderRadius.only(
-        //       topLeft: Radius.circular(20.0),
-        //       topRight: Radius.circular(20.0),
-        //     ),
-        //   ),
-        //   alignment: Alignment.center,
-        //   child: Text(
-        //     'Suhu Ruang',
-        //     style: TextStyle(
-        //       fontFamily: 'SansPro',
-        //       fontSize: 14,
-        //       color: Colors.white,
-        //     ),
-        //   ),
-        // )
       ],
     ),
   );
@@ -154,7 +134,6 @@ Container accountbox(
         color: Colors.white, borderRadius: BorderRadius.circular(15)),
     child: Center(
       child: Column(
-        // alignment: Alignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -163,7 +142,6 @@ Container accountbox(
               width: MediaQuery.of(context).size.width * 0.21,
               height: MediaQuery.of(context).size.width * 0.21,
               decoration: BoxDecoration(
-                // color: Color(0XFF084B72),
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -252,7 +230,6 @@ Container monitoringbox2(BuildContext context, String title, String content) {
 class pickphoto extends StatefulWidget {
   final Function(File?) onImageSelected;
   final AssetImage initialImage;
-  // const pickphoto({super.key});
 
   const pickphoto(
       {super.key, required this.onImageSelected, required this.initialImage});
@@ -323,24 +300,6 @@ class _pickphotoState extends State<pickphoto> {
     );
   }
 }
-
-// class CalendarPicker {
-//   DateTime _selectedDate = DateTime.now();
-
-//   Future<void> _selectDate(BuildContext context) async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate: _selectedDate,
-//       firstDate: DateTime(2000),
-//       lastDate: DateTime(2101),
-//     );
-//     if (picked != null && picked != _selectedDate) {
-//       setState(() {
-//         _selectedDate = picked;
-//       });
-//     }
-//   }
-// }
 
 class CalendarPicker extends StatefulWidget {
   const CalendarPicker({super.key});
