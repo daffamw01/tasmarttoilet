@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:tasmarttoilet/services/BluetoothWidget.dart';
+import 'package:tasmarttoilet/Bluetooth/BluetoothWidget.dart';
 
 class FlutterBlueApp extends StatelessWidget {
   const FlutterBlueApp({super.key});

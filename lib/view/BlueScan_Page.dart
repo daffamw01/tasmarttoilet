@@ -4,8 +4,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:tasmarttoilet/controller/bluetooth_controller.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
-import 'package:tasmarttoilet/services/BluetoothTry.dart';
-import 'package:tasmarttoilet/services/BluetoothWidget.dart';
+import 'package:tasmarttoilet/Bluetooth/BluetoothTry.dart';
+import 'package:tasmarttoilet/Bluetooth/BluetoothWidget.dart';
 
 class BlueScanPage extends StatefulWidget {
   const BlueScanPage({super.key});
