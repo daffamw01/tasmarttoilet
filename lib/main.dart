@@ -3,15 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:tasmarttoilet/screens/Admin_Page.dart';
-import 'package:tasmarttoilet/screens/MonitoringPegawai_Page.dart';
-import 'package:tasmarttoilet/screens/Account_Page.dart';
 import 'package:tasmarttoilet/models/User_Model.dart';
-import 'package:tasmarttoilet/screens/Login_Page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tasmarttoilet/services/firebaseApi.dart';
+import 'package:tasmarttoilet/view/Account_Page.dart';
+import 'package:tasmarttoilet/view/Admin_Page.dart';
+import 'package:tasmarttoilet/view/JadwalPegawai_Page.dart';
 import 'dart:convert';
-import 'package:tasmarttoilet/screens/JadwalPegawai_Page.dart';
+
+import 'package:tasmarttoilet/view/Login_Page.dart';
+import 'package:tasmarttoilet/view/Monitoring_Page.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tasmarttoilet/screens/BlueScan_Page.dart';
+import 'package:tasmarttoilet/view/BlueScan_Page.dart';
 import 'package:tasmarttoilet/services/ChangePass.dart';
 import 'package:tasmarttoilet/models/User_Model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
+
+// file_variabel_global.dart
+class GlobalVariables {
+  static String globalVariable = "";
+}
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -39,6 +44,7 @@ class _AccountPageState extends State<AccountPage> {
                       if (snapshot.data != null) {
                         UserModel pegawai =
                             userModelFromJson(json.encode(snapshot.data));
+                        GlobalVariables.globalVariable = pegawai.fullName;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -61,8 +67,6 @@ class _AccountPageState extends State<AccountPage> {
                                   ),
                                   Text(
                                     "${pegawai.fullName}!",
-                                    // maxLines: 1,
-                                    // overflow: TextOverflow.visible,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'SansPro',
@@ -77,7 +81,7 @@ class _AccountPageState extends State<AccountPage> {
                             Center(
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
-                                height: click ? 340 : 290,
+                                height: click ? 355 : 300,
                                 child: Column(
                                   children: [
                                     Expanded(
@@ -142,7 +146,6 @@ class _AccountPageState extends State<AccountPage> {
                                                   ),
                                                 ],
                                               ),
-                                              // ],
                                             );
                                           }),
                                     ),

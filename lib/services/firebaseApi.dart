@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:tasmarttoilet/screens/MonitoringPegawai_Page.dart';
-import 'package:tasmarttoilet/screens/main.dart';
+import 'package:tasmarttoilet/main.dart';
+import 'package:tasmarttoilet/view/Monitoring_Page.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print("Title: ${message.notification!.title}");
