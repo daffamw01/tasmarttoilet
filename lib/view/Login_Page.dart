@@ -166,10 +166,10 @@ class _loginpageState extends State<loginpage> {
         barrierDismissible: false,
         builder: (context) => const Center(child: CircularProgressIndicator()));
     try {
-      // final userCredential = await FirebaseAuth.instance
-      //     .signInWithEmailAndPassword(
-      //         email: emailController.text.trim(),
-      //         password: passwordController.text.trim());
+      final userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
 
       if (mounted) {
         navigatorKey.currentState!.popUntil((route) => route.isFirst);

@@ -31,7 +31,7 @@ dependencies:
   get: ^4.6.6
   syncfusion_flutter_calendar: ^23.1.42
   table_calendar: ^3.0.9
-  flutter_blue: ^0.8.0
+  flutter_blue: any
   gatt:
   flutter_clean_calendar2: ^0.0.1
   cloud_firestore: ^4.12.1
