@@ -145,6 +145,7 @@ class _loginpageState extends State<loginpage> {
                                 child: const Text(
                                   'Login',
                                   selectionColor: Colors.white,
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ],

@@ -38,20 +38,20 @@ class _AdminPageState extends State<AdminPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 top: 20, left: 10, bottom: 20),
-                            width: MediaQuery.of(context).size.width * 0.6,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: Text(
-                              "Hai, Selamat Pagi Daffa!",
+                              "Halaman Admin",
                               style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'SansPro',
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.065,
-                              ),
+                                  color: Colors.white,
+                                  fontFamily: 'SansPro',
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.07,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
-                          const SizedBox(width: 9),
+                          const SizedBox(width: 25),
                           Container(
-                            padding: const EdgeInsets.only(right: 10),
+                            // padding: const EdgeInsets.only(right),
                             width: 115,
                             height: 50,
                             child: ElevatedButton.icon(
@@ -106,6 +106,7 @@ class _AdminPageState extends State<AdminPage> {
                             style: TextStyle(
                                 fontFamily: 'SansPro',
                                 fontWeight: FontWeight.bold,
+                                color: Colors.white,
                                 fontSize:
                                     MediaQuery.of(context).size.width * 0.05),
                           ),

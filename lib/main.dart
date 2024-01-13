@@ -101,7 +101,10 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: AppBar(
-        title: const Text('Smart Toilet'),
+        title: const Text(
+          'Smart Toilet',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color(0XFF003452),
       ),
       bottomNavigationBar: userRole == 'Admin'

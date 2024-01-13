@@ -90,7 +90,7 @@ class _BlueScanPageState extends State<BlueScanPage> {
                           //   });
                           // }
                         });
-                        Fluttertoast.showToast(msg: "Berhasil Absen");
+                        Fluttertoast.showToast(msg: "Berhasil Presensi");
                       }
                       // else {
                       //   Fluttertoast.showToast(msg: "Gagal Absen");
