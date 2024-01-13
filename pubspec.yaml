@@ -49,9 +49,14 @@ flutter_native_splash:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
   flutter_lints: ^2.0.0
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "images/icon_app.jpg"
 flutter:
   uses-material-design: true
 

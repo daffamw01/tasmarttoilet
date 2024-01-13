@@ -9,7 +9,7 @@
 
 
     <application
-        android:label="tasmarttoilet"
+        android:label="Smart Toilet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
