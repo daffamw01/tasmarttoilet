@@ -52,12 +52,14 @@ class _AdminPageState extends State<AdminPage> {
                           const SizedBox(width: 25),
                           Container(
                             // padding: const EdgeInsets.only(right),
-                            width: 115,
+                            width: 128,
                             height: 50,
                             child: ElevatedButton.icon(
-                              icon: const Icon(Icons.task),
-                              label: const Text(
+                              icon: const Icon(Icons.task,
+                                  color: Color(0xFF003452)),
+                              label: Text(
                                 'Edit Jadwal',
+                                style: TextStyle(color: Color(0xFF003452)),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
