@@ -52,7 +52,7 @@ class _AdminPageState extends State<AdminPage> {
                           const SizedBox(width: 25),
                           Container(
                             // padding: const EdgeInsets.only(right),
-                            width: 128,
+                            width: 120,
                             height: 50,
                             child: ElevatedButton.icon(
                               icon: const Icon(Icons.task,

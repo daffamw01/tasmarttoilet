@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:tasmarttoilet/models/Schedule_Model.dart';
+import 'package:tasmarttoilet/models/schedule_model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 
 class CalendarTry extends StatefulWidget {
@@ -121,7 +121,8 @@ class EventDataSource extends CalendarDataSource {
         .map((event) => Appointment(
               startTime: event.date,
               endTime: event.date.add(const Duration(hours: 1)),
-              subject: event.fullName,
+              subject:
+                  '${event.presensi == 'Sudah Presensi' ? '✅' : '❎'} ${event.fullName}',
               isAllDay: true,
             ))
         .toList();

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:tasmarttoilet/models/Schedule_Model.dart';
+import 'package:tasmarttoilet/models/schedule_model.dart';
 import 'package:tasmarttoilet/reusable_widget/reusable_widget.dart';
 import 'package:tasmarttoilet/services/getData.dart';
 
@@ -139,6 +139,7 @@ class _EditJadwalState extends State<EditJadwal> {
     String selectedDate = dateController.text;
     DateTime dateTime = DateFormat('EEEE, dd/MM/yyyy').parse(selectedDate);
     String fullName = selectedFullName ?? "";
+    String presensi = "Belum Presensi";
 
     if (fullName.isNotEmpty) {
       DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
@@ -153,8 +154,8 @@ class _EditJadwalState extends State<EditJadwal> {
         print("userData: $userData");
         String uid = userData!.keys.first;
 
-        ScheduleModel schedule =
-            ScheduleModel(date: dateTime, fullName: fullName, uid: uid);
+        ScheduleModel schedule = ScheduleModel(
+            date: dateTime, fullName: fullName, uid: uid, presensi: presensi);
 
         final firestoreInstance = FirebaseFirestore.instance;
 
