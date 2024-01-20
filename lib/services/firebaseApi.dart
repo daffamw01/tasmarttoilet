@@ -4,9 +4,12 @@ import 'package:tasmarttoilet/main.dart';
 import 'package:tasmarttoilet/view/Monitoring_Page.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
+  message.notification!.title;
+  message.notification!.body;
   print("Title: ${message.notification!.title}");
   print("Body: ${message.notification!.body}");
   print("Payload: ${message.data}");
+  print("Time : ${DateTime.now()}");
 }
 
 class FirebaseApi {
