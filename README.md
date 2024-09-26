@@ -1,5 +1,1 @@
-![Halaman Login](https://github.com/user-attachments/assets/10b14283-79bc-4920-afe3-f24aac11ab31)
-![Monitoring](https://github.com/user-attachments/assets/9c3fd891-13b9-40e2-ba94-e37421e8a38c)
-![Jadwal Petugas](https://github.com/user-attachments/assets/65a838b7-d544-4a9c-b1b4-6aac6841148d)
-![Admin Page](https://github.com/user-attachments/assets/a641e866-e582-43fb-9965-09b5486bea5c)
-![Halaman Akun](https://github.com/user-attachments/assets/4a8e4a61-6ba2-4a6e-86fa-395040bb4d11)
+![](https://github.com/user-attachments/assets/e1f737cc-b93d-4cbd-9836-79f415053c35)
